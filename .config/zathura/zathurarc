@@ -1,0 +1,48 @@
+# General settings
+set selection-clipboard clipboard
+set statusbar-h-padding 5
+set statusbar-v-padding 3
+set adjust-open width
+set window-title-home-tilde true
+set enable-horizontal-adjustment true
+set zoom-step 1.2
+set scroll-step 30
+
+# Colors and styling
+set default-bg "#1e1e1e"               # Background color for gray mode
+set default-fg "#dcdcdc"               # Text color for gray mode
+set statusbar-bg "#333333"             # Statusbar background color
+set statusbar-fg "#FFFFFF"             # Statusbar text color
+set highlight-color "#FFD700"          # Highlight color
+set highlight-active-color "#FF4500"   # Active highlight color
+
+# Gray mode recolor (Dark Mode with soft contrast)
+set recolor true                       # Enable gray mode by default
+set recolor-lightcolor "#1e1e1e"       # Dark gray background
+set recolor-darkcolor "#dcdcdc"        # Light gray text for better readability
+set recolor-keephue false
+map t recolor                  # Toggle gray mode on/off with 'n'
+
+# Keybindings
+map <C-j> scroll down
+map <C-k> scroll up
+map <C-h> scroll left
+map <C-l> scroll right
+map z zoom-in
+map x zoom-out
+map u scroll half-up
+map d scroll half-down
+map r reload
+map o open
+map f toggle_fullscreen
+map n navigate next
+map p navigate previous
+map s save
+
+# Smooth scrolling (uncomment if supported)
+# set smooth-scroll true
+
+# Page setup
+set page-padding 5
+set first-page-column 1
+set single-column true

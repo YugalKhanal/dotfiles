@@ -1,0 +1,10 @@
+{
+  "group/systray": {
+    "orientation": "horizontal",
+    "modules": ["custom/media", "pulseaudio", "network", "tray", "bluetooth", "custom/nightmode"],
+  },
+  "group/hardware-info": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory", "disk", "custom/power"],
+  },
+}

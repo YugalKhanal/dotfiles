@@ -1,0 +1,46 @@
+# Video Settings
+vo=gpu
+gpu-context=wayland   # Use this for Wayland sessions; use 'x11' or 'auto' for X11
+profile=gpu-hq        # High-quality video rendering
+scale=ewa_lanczossharp # Good quality upscaling filter for sharpness
+cscale=bilinear       # Chroma scaling method
+deband=yes            # Reduce banding artifacts
+dither-depth=auto     # Automatic dithering
+hwdec=no           # Hardware decoding when possible
+hwdec=vdpau
+interlace=auto
+video-sync=display-resample
+interpolation=yes                # Enables video frame interpolation for smoother playback
+tscale=oversample
+opengl-backend=wayland                  # or 'x11' depending on your session
+opengl-early-flush=no                   # Prevent premature flushing of the GPU pipeline
+
+
+# Audio Settings
+audio-channels=stereo
+volume=100
+volume-max=200        # Allows raising volume beyond 100%
+audio-file-auto=weak  # Automatically load external audio files (e.g., commentary tracks)
+
+# Subtitles
+sub-auto=fuzzy        # Automatically load subtitle files with fuzzy matching
+sub-font-size=36      # Subtitle font size
+sub-font="Arial"      # Subtitle font
+sub-border-size=1.5   # Subtitle border thickness
+sub-color="#ffffff"   # Subtitle color (white)
+sub-border-color="#000000" # Border color (black)
+
+# User Experience Tweaks
+screenshot-format=png  # Set screenshots to PNG format
+screenshot-directory=~/Pictures/mpv-screenshots  # Directory for screenshots
+osd-fractions=yes      # Display precise playback time with fractions
+cache=yes              # Enable caching for network streams
+cache-secs=30          # Buffering cache duration for smoother streaming
+hr-seek=yes            # High precision seeking
+ytdl-format=bestvideo+bestaudio/best  # Youtube-dl quality settings (if using YouTube playback)
+
+# Save watch later position
+save-position-on-quit=yes  # Resumes playback from the last position
+
+# Keybindings (optional)
+input-default-bindings=yes  # Enable default key bindings

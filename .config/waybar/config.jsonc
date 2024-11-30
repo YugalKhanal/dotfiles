@@ -1,0 +1,22 @@
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "spacing": 6,
+    "margin": "4px 5px",
+    "exclusive": true,
+    "fixed-center": true,
+    "modules-left": ["custom/launcher", "wlr/taskbar", "hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": [
+      "custom/notification",
+      "group/systray",
+      "clock",
+      "group/hardware-info",
+    ],
+    "include": [
+      "~/.config/waybar/modules/modules.jsonc",
+      "~/.config/waybar/modules/groups.jsonc",
+    ],
+  },
+]
