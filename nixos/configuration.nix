@@ -192,6 +192,9 @@
     gopls
     hyprls
     mpi
+    prettierd
+    biome
+    vscode-langservers-extracted
     pkg-config
     llvmPackages_12.openmp
     python312Packages.numpy
@@ -264,12 +267,20 @@
     playerctl
     banana-cursor
     pavucontrol
+    tcpdump
   ];
 
   programs.hyprland = {
     enable = true;
     # nvidiaPatches = true;
     xwayland.enable = true;
+  };
+
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly"; # Run GC every week
+    options = "--delete-older-than 7d"; # Keep only the last 7 days of generations
   };
 
   environment.sessionVariables = {
@@ -299,7 +310,7 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [ 3000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

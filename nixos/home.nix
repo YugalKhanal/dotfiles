@@ -37,6 +37,7 @@
     protonvpn-gui
     ripgrep
     fzf
+    fontconfig
     zoxide # Advanced directory changer
     hello
     eza # Enhanced ls command
@@ -49,7 +50,8 @@
     networkmanagerapplet
     tailscale
     mpi
-    nerd-fonts.jetbrains-mono
+    # nerd-fonts.jetbrains-mono
+    nerd-fonts.hack
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -105,6 +107,8 @@
     XCURSOR_SIZE = "24"; # Optional: Set cursor size
 
   };
+
+fonts.fontconfig.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
