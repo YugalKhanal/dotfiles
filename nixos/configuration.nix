@@ -83,7 +83,10 @@
   # Update your Bluetooth configuration
   hardware.bluetooth = {
     enable = true;
+    powerOnBoot = true;
   };
+
+  services.pulseaudio.enable = true;
 
   # Make sure the Bluetooth service starts up properly
   services.blueman.enable = true;
@@ -97,23 +100,20 @@
 
   virtualisation.docker.enable = true;
 
-  # Enable sound with pipewire.
-  # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # Enable sound with Pipewire.
+  # services.pulseaudio.enable = true;
+
+  # Enable sound with pipewire .
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-    wireplumber.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    enable = false;
+    # alsa.enable = true;
+    # alsa.support32Bit = true;
+    # pulse.enable = true;
+    # jack.enable = true;
+    # wireplumber.enable = true;
   };
+
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -145,6 +145,16 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  systemd.user.services.pipewire = {
+    enable = true;
+    wantedBy = [ "default.target" ];
+  };
+
+  systemd.user.services.wireplumber = {
+    enable = true;
+    wantedBy = [ "default.target" ];
+  };
+
 
   # Setting nerdfont
 
@@ -168,6 +178,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pulseaudio
+    pipewire
+    pavucontrol # GUI for managing audio
     stow
     lxqt.lxqt-archiver
     zip
@@ -193,7 +206,6 @@
     hyprls
     mpi
     prettierd
-    biome
     vscode-langservers-extracted
     pkg-config
     llvmPackages_12.openmp
@@ -216,6 +228,7 @@
     nodejs_22
     python3
     luajit
+    bluez
     rustc
     cargo
     ripgrep
@@ -268,6 +281,7 @@
     banana-cursor
     pavucontrol
     tcpdump
+    warp-terminal
   ];
 
   programs.hyprland = {
@@ -309,7 +323,8 @@
 
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
+  # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 ];
   networking.firewall.allowedUDPPorts = [ 3000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
