@@ -24,7 +24,7 @@
     protonup
     lutris
     heroic
-    # bottles
+    bottles
     wine
     wineWowPackages.full # (optional: for 32-bit and 64-bit support)
     # bottles-unwrapped

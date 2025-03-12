@@ -48,7 +48,6 @@
     wlsunset
     wlr-randr
     networkmanagerapplet
-    tailscale
     mpi
     nerd-fonts.jetbrains-mono
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -107,7 +106,7 @@
 
   };
 
-fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

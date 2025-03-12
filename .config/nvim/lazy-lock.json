@@ -15,6 +15,7 @@
   "leap.nvim": { "branch": "main", "commit": "8b826a9fc766bffd14288aee01847cb0d6c6c383" },
   "leetcode.nvim": { "branch": "master", "commit": "db7e1cd6b9191b34b4c1f2f96e4e3949cde9f951" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "e96fd85bf18bc345dab332b345098fa5460dffac" },
+  "neoscroll.nvim": { "branch": "master", "commit": "f957373912e88579e26fdaea4735450ff2ef5c9c" },
   "noice.nvim": { "branch": "main", "commit": "0427460c2d7f673ad60eb02b35f5e9926cf67c59" },
   "none-ls.nvim": { "branch": "main", "commit": "f41624ea1a73f020ddbd33438f74abb95ea17d55" },
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },

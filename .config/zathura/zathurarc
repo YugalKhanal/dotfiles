@@ -38,6 +38,7 @@ map f toggle_fullscreen
 map n navigate next
 map p navigate previous
 map s save
+map <C-w> exec "bash /home/yugalkhanal/dotfiles/.config/zathura/word-counter.sh $FILE"
 
 # Smooth scrolling (uncomment if supported)
 # set smooth-scroll true

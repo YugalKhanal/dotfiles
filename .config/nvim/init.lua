@@ -22,9 +22,9 @@ local opts = {}
 -- require("lazy").setup("plugins")
 require("vim-options")
 require("mappings")
-require("lazy").setup("plugins", require "lazy_config")
+require("lazy").setup("plugins", require("lazy_config"))
 
 -- NVCHAD UI setup
 for _, v in pairs(vim.fn.readdir(vim.g.base46_cache)) do
-  dofile(vim.g.base46_cache .. v)
+	dofile(vim.g.base46_cache .. v)
 end

@@ -1,0 +1,9 @@
+{
+  "use_geoclue": false,
+  "latitude": 0.0,
+  "longitude": 0.0,
+  "schedule": [
+    { "time": "08:00", "mode": "light" },
+    { "time": "18:00", "mode": "dark" }
+  ]
+}

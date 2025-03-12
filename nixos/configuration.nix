@@ -67,24 +67,26 @@
   services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "mac";
-  };
-
-
   # Configure console keymap
   console.keyMap = "uk";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Update your Bluetooth configuration
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "gb";
+    variant = "mac";
+  };
+
+  services.tailscale.enable = true;
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
 
   services.pulseaudio.enable = true;
 
@@ -155,6 +157,17 @@
     wantedBy = [ "default.target" ];
   };
 
+  systemd.user.services.darkman = {
+    enable = true;
+    description = "Darkman system-wide dark mode daemon";
+    serviceConfig = {
+      ExecStart = "${pkgs.darkman}/bin/darkman --server";
+      Restart = "always";
+    };
+    wantedBy = [ "default.target" ];
+  };
+
+
 
   # Setting nerdfont
 
@@ -163,7 +176,6 @@
   #   (nerdfonts.override {fonts = ["JetBrainsMono"];})
   # ];
 
-  # Install firefox.
   # programs.firefox.enable = true;
   programs.wireshark.enable = true;
 
@@ -178,6 +190,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    tailscale
     pulseaudio
     pipewire
     pavucontrol # GUI for managing audio
@@ -282,6 +295,11 @@
     pavucontrol
     tcpdump
     warp-terminal
+    poppler_utils
+    bc
+    libnotify
+    darkman
+    zoom-us
   ];
 
   programs.hyprland = {
