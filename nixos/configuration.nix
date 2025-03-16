@@ -190,6 +190,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    tree
     tailscale
     pulseaudio
     pipewire
@@ -204,8 +205,7 @@
     neovim
     lazygit
     firefox
-    alacritty
-    kitty
+    ghostty
     brave
     tmux
     git
@@ -342,7 +342,7 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
   networking.firewall.allowedUDPPorts = [ 3000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
