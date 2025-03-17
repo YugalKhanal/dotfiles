@@ -129,6 +129,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
+    imagemagick
     tree
     tailscale
     pulseaudio
@@ -263,13 +264,13 @@
 
 
   # Stylix
-  stylix = {
-    enable = true;
-    image = pkgs.fetchurl {
-      url = "https://github.com/YugalKhanal/dotfiles/blob/master/wallpapers/city.png";
-      sha256 = "07g2lyvi4gnvw37xrsk01i74waqyrf3maqw291yi188alcbs2zds";
-    };
-  };
+  # stylix = {
+  #   enable = true;
+  #   image = pkgs.fetchurl {
+  #     url = "https://github.com/YugalKhanal/dotfiles/blob/master/wallpapers/city.png";
+  #     sha256 = "07g2lyvi4gnvw37xrsk01i74waqyrf3maqw291yi188alcbs2zds";
+  #   };
+  # };
 
   # List services that you want to enable:
   # Enable the X11 windowing system.
