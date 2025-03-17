@@ -16,7 +16,3 @@
 
 # theme = "Desert"
 font-feature = -calt, -liga, -dlig
-
-cursor-style = system
-xcursor-theme = banana-cursor
-xcursor-size = 24
