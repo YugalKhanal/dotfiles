@@ -263,17 +263,13 @@
 
 
   # Stylix
-  stylix.enable = true;
-  # stylix.image = "${builtins.getEnv "HOME"}/yugalkhanal/wallpapers/city.png";
-  # stylix.image = "/home/yugalkhanal/wallpapers/city.png";
-  # stylix.image = "/home/yugalkhanal/wallpapers/city.png";
-
-  stylix.image = builtins.path {
-    path = "/etc/nixos/wallpaper.jpg";
-    name = "wallpaper.jpg";
+  stylix = {
+    enable = true;
+    image = pkgs.fetchurl {
+      url = "https://github.com/YugalKhanal/dotfiles/blob/master/wallpapers/city.png";
+      sha256 = "07g2lyvi4gnvw37xrsk01i74waqyrf3maqw291yi188alcbs2zds";
+    };
   };
-
-
 
   # List services that you want to enable:
   # Enable the X11 windowing system.
