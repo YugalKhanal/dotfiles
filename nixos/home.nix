@@ -101,8 +101,8 @@
     PAGER = "less";
 
     # Add the cursor settings here:
-    XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
-    XCURSOR_SIZE = "24"; # Optional: Set cursor size
+    # XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
+    # XCURSOR_SIZE = "24"; # Optional: Set cursor size
 
   };
 
