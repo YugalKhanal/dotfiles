@@ -2,7 +2,9 @@
 
 {
   programs.nixvim = {
-    enable = true;
+    # No enable = true here
+    
+    config = {
     
     plugins = {
       aerial = {
@@ -15,5 +17,6 @@
     keymaps = [
       { mode = "n"; key = "<leader>co"; action = "<CMD>AerialToggle<CR>"; options.desc = "Open Code Outline"; }
     ];
+    };
   };
 }

@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 {
+programs.nixvim = {
+
+config = {
     plugins.comment = {
       enable = true;
     };
@@ -16,4 +19,6 @@
       { mode = "v"; key = "<leader>/"; action = "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>"; options.desc = "Toggle comment"; }
     ];
   
+  };
+  };
 }

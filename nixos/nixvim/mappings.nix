@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   programs.nixvim = {
-
+  config = {
     keymaps = [
       # Insert mode movement
       { mode = "i"; key = "<C-h>"; action = "<Left>"; options.desc = "Move left"; }
@@ -13,5 +13,7 @@
       { mode = "n"; key = "<leader>S"; action = ":w<CR>"; options.desc = "Save file"; }
       { mode = "n"; key = "<leader>Q"; action = ":q<CR>"; options.desc = "Quit file"; }
     ];
+  };
+
   };
 }

@@ -2,9 +2,11 @@
 
 {
   programs.nixvim = {
-    enable = true;
 
-    options = {
+  config = {
+
+
+    opts = {
       expandtab = true;
       number = true;
       tabstop = 2;
@@ -25,9 +27,10 @@
       { mode = "v"; key = "d"; action = "\"_d"; }
     ];
 
-    extraConfigLua = ''
-      vim.lsp.inlay_hint.enable()
-    '';
+      # extraConfigLua = [ ''
+      #   vim.lsp.inlay_hint.enable()
+      # '' ];
+    };
   };
 }
 

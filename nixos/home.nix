@@ -90,6 +90,7 @@
 
   # ${builtins.readFile ./nvim/options.lua}
   home.packages = with pkgs; [
+    vimPlugins.nvim-cmp
     bat
     fd
     protonvpn-gui
