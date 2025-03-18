@@ -2,21 +2,17 @@
 
 {
 
-  imports = [ ./sh.nix ];
+  imports = [
+  ./sh.nix
+  ./nixvim
+  ];
   # imports = [ /home/yugalkhanal/.dotfiles/nixos/sh.nix ];
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "yugalkhanal";
   home.homeDirectory = "/home/yugalkhanal";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  nixpkgs.config.allowUnfree = true;
 
   programs.obs-studio = {
     enable = true;
@@ -26,21 +22,83 @@
       obs-pipewire-audio-capture
     ];
   };
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+
+  programs.nixvim.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+
+    # plugins = with pkgs.vimPlugins; [
+    #   nvim-lspconfig
+    #   comment-nvim
+    #   aerial-nvim
+    #   auto-pairs
+    #   nvim-cmp
+    #   luasnip
+    #   cmp-nvim-lsp
+    #   copilot-vim
+    #   dashboard-nvim
+    #   gitsigns-nvim
+    #   indent-blankline-nvim
+    #   lazygit-nvim
+    #   leap-nvim
+    #   leetcode-nvim
+    #   neo-tree-nvim
+    #   none-ls-nvim
+    #   nvterm
+    #   presence-nvim
+    #   telescope-nvim
+    #   nvim-treesitter
+    #   trim-nvim
+    #   vim-devicons
+    #   vim-tmux-navigator
+    #   vimtex
+    #   which-key-nvim
+    #   telescope-fzf-native-nvim
+    #   friendly-snippets
+    #   lualine-nvim
+    #
+    #   (nvim-treesitter.withPlugins (p: [
+    #     p.tree-sitter-nix
+    #     p.tree-sitter-python
+    #     p.tree-sitter-javascript
+    #     p.tree-sitter-html
+    #     p.tree-sitter-css
+    #     p.tree-sitter-lua
+    #     p.tree-sitter-go
+    #     p.tree-sitter-rust
+    #     p.tree-sitter-c
+    #     p.tree-sitter-cpp
+    #     p.tree-sitter-java
+    #     p.tree-sitter-json
+    #     p.tree-sitter-toml
+    #     p.tree-sitter-yaml
+    #     p.tree-sitter-bash
+    #     p.tree-sitter-vim
+    #   ]))
+    #
+    #   vim-nix
+    # ];
+    #
+    # extraLuaConfig = ''
+    #   -- Write Lua code here
+    #   -- or interpolate files like this:
+    # '';
+  };
+
+  # ${builtins.readFile ./nvim/options.lua}
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     bat
     fd
     protonvpn-gui
     ripgrep
     fzf
     fontconfig
-    zoxide # Advanced directory changer
+    zoxide
     hello
-    eza # Enhanced ls command
+    eza
     git
     banana-cursor
     swaynotificationcenter
@@ -50,11 +108,6 @@
     networkmanagerapplet
     mpi
     nerd-fonts.jetbrains-mono
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -101,8 +154,8 @@
     PAGER = "less";
 
     # Add the cursor settings here:
-    # XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
-    # XCURSOR_SIZE = "24"; # Optional: Set cursor size
+    XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
+    XCURSOR_SIZE = "24"; # Optional: Set cursor size
 
   };
 

@@ -129,6 +129,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
+    tldr
     imagemagick
     tree
     tailscale
@@ -142,7 +143,6 @@
     gnumake
     vim
     wget
-    neovim
     lazygit
     firefox
     wireshark
@@ -255,8 +255,8 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
-    XCURSOR_THEME = "banana-cursor";
-    XCURSOR_SIZE = "24";
+    # XCURSOR_THEME = "banana-cursor";
+    # XCURSOR_SIZE = "24";
   };
 
   xdg.portal.enable = true;
@@ -267,9 +267,15 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "    https://github.com/YugalKhanal/dotfiles/blob/master/wallpapers/1363709.png";
-      sha256 = "18q0wi0q9h68b2sfj6pnslv0g3p8v6wdp1763dyi7p1sg7r8qg89";
+      url = "https://raw.githubusercontent.com/YugalKhanal/dotfiles/refs/heads/master/wallpapers/city-fixed.png";
+      sha256 = "1f3qaalzc4dczdqspshlldyzyrj8yvbxzgg7y8qbr2piwc3bqj9d";
     };
+    cursor = {
+      name = "Banana cursor";
+      package = pkgs.banana-cursor;
+      size = 24;
+    };
+    polarity = "dark";
   };
 
   # List services that you want to enable:

@@ -1,26 +1,3 @@
-# {
-#   description = "Nixos config flake";
-#
-#   inputs = {
-#     nixpkgs.url = "nixpkgs/nixos-unstable";
-#
-#     home-manager = {
-#       url = "github:nix-community/home-manager";
-#       inputs.nixpkgs.follows = "nixpkgs";
-#     };
-#   };
-#
-#   outputs = { self, nixpkgs, ... }@inputs: {
-#     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-#       specialArgs = {inherit inputs;};
-#       modules = [
-#         ./configuration.nix
-#         inputs.home-manager.nixosModules.default
-#       ];
-#     };
-#   };
-# }
-
 {
   description = "My first flake";
 
@@ -29,9 +6,11 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }:
+  outputs = { self, nixpkgs, home-manager, stylix, nixvim, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -46,12 +25,11 @@
       };
       homeConfigurations = {
         yugalkhanal = home-manager.lib.homeManagerConfiguration {
-          # system = "x86_64-linux";
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [ ./home.nix nixvim.homeManagerModules.nixvim];
         };
       };
-
     };
-
 }
+
+
