@@ -3,8 +3,8 @@
 {
 
   imports = [
-  ./sh.nix
-  ./nixvim
+    ./sh.nix
+    ./nixvim
   ];
   # imports = [ /home/yugalkhanal/.dotfiles/nixos/sh.nix ];
   home.username = "yugalkhanal";
@@ -23,72 +23,12 @@
     ];
   };
 
-  programs.nixvim.enable = true;
-
-  programs.neovim = {
+  programs.nixvim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-
-    # plugins = with pkgs.vimPlugins; [
-    #   nvim-lspconfig
-    #   comment-nvim
-    #   aerial-nvim
-    #   auto-pairs
-    #   nvim-cmp
-    #   luasnip
-    #   cmp-nvim-lsp
-    #   copilot-vim
-    #   dashboard-nvim
-    #   gitsigns-nvim
-    #   indent-blankline-nvim
-    #   lazygit-nvim
-    #   leap-nvim
-    #   leetcode-nvim
-    #   neo-tree-nvim
-    #   none-ls-nvim
-    #   nvterm
-    #   presence-nvim
-    #   telescope-nvim
-    #   nvim-treesitter
-    #   trim-nvim
-    #   vim-devicons
-    #   vim-tmux-navigator
-    #   vimtex
-    #   which-key-nvim
-    #   telescope-fzf-native-nvim
-    #   friendly-snippets
-    #   lualine-nvim
-    #
-    #   (nvim-treesitter.withPlugins (p: [
-    #     p.tree-sitter-nix
-    #     p.tree-sitter-python
-    #     p.tree-sitter-javascript
-    #     p.tree-sitter-html
-    #     p.tree-sitter-css
-    #     p.tree-sitter-lua
-    #     p.tree-sitter-go
-    #     p.tree-sitter-rust
-    #     p.tree-sitter-c
-    #     p.tree-sitter-cpp
-    #     p.tree-sitter-java
-    #     p.tree-sitter-json
-    #     p.tree-sitter-toml
-    #     p.tree-sitter-yaml
-    #     p.tree-sitter-bash
-    #     p.tree-sitter-vim
-    #   ]))
-    #
-    #   vim-nix
-    # ];
-    #
-    # extraLuaConfig = ''
-    #   -- Write Lua code here
-    #   -- or interpolate files like this:
-    # '';
   };
 
-  # ${builtins.readFile ./nvim/options.lua}
   home.packages = with pkgs; [
     vimPlugins.nvim-cmp
     bat

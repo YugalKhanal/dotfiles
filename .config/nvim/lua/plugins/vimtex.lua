@@ -9,6 +9,6 @@ return {
     vim.g.vimtex_view_method = "zathura"
     vim.cmd([[set conceallevel=2]])
     vim.cmd([[let g:tex_conceal='abdmg']])
-    vim.g.vimtex_quickfix_ignore_filters = { "Overfull \\hbox" }
+    -- vim.g.vimtex_quickfix_ignore_filters = { "Overfull \\hbox" }
   end,
 }

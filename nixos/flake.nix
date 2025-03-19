@@ -26,10 +26,12 @@
       homeConfigurations = {
         yugalkhanal = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix nixvim.homeManagerModules.nixvim];
+          modules = [
+            ./home.nix
+            nixvim.homeManagerModules.nixvim
+            stylix.homeManagerModules.stylix
+          ];
         };
       };
     };
 }
-
-
