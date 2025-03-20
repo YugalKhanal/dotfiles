@@ -20,7 +20,10 @@
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix stylix.nixosModules.stylix ];
+          modules = [
+            ./configuration.nix
+            stylix.nixosModules.stylix
+          ];
         };
       };
       homeConfigurations = {

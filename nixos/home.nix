@@ -29,6 +29,77 @@
     vimAlias = true;
   };
 
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      # Set Ctrl-R to reload tmux config
+      unbind r
+      bind r source-file ~/.config/tmux/tmux.conf
+
+      # Better colours
+      set-option -sa terminal-overrides ",xterm*:Tc"
+
+      # Set mouse
+      set -g mouse on
+
+      # Set prefix
+      unbind C-b
+      set -g prefix C-space
+      bind C-space send-prefix
+
+      # Set window index to 1 at startup
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
+
+      set -g @plugin 'tmux-plugins/tpm'
+      set -g @plugin 'tmux-plugins/tmux-sensible'
+      set -g @plugin 'christoomey/vim-tmux-navigator'
+      set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
+      set -g @plugin 'tmux-plugins/tmux-yank'
+
+      set -g default-terminal "tmux-256color"
+      set -ga terminal-overrides ",xterm-256color:RGB"
+
+      # Nerd font for window name
+      set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+
+      # Set vi-mode (visual)
+      set-window-option -g mode-keys vi
+
+      # Move status bar to the top
+      set-option -g status-position top
+
+      # Vim navigation keys for pane navigation
+      bind-key h select-pane -L
+      bind-key j select-pane -D
+      bind-key k select-pane -U
+      bind-key l select-pane -R
+
+      # keybindings
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectanble-toggle
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+      # Open panes in current directory
+      bind '"' split-window -v -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
+
+      # Remap leader+n/p to leader+h/l
+      unbind n
+      unbind p
+      bind h previous-window
+      bind l next-window
+
+      run '~/.tmux/plugins/tpm/tpm'
+            set -g default-terminal "tmux-256color"
+            set -ga terminal-overrides ",xterm-256color:RGB"
+            run-shell ~/.tmux/plugins/tpm/tpm
+    '';
+  };
+
+
   home.packages = with pkgs; [
     vimPlugins.nvim-cmp
     bat
@@ -57,6 +128,40 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  stylix = {
+    enable = true;
+    base16Scheme = {
+      base00 = "1e1e2e";
+      base01 = "181825";
+      base02 = "313244"; # surface0
+      base03 = "45475a"; # surface1
+      base04 = "585b70"; # surface2
+      base05 = "cdd6f4"; # text
+      base06 = "f5e0dc"; # rosewater
+      base07 = "b4befe"; # lavender
+      base08 = "f38ba8"; # red
+      base09 = "fab387"; # peach
+      base0A = "f9e2af"; # yellow
+      base0B = "a6e3a1"; # green
+      base0C = "94e2d5"; # teal
+      base0D = "89b4fa"; # blue
+      base0E = "cba6f7"; # mauve
+      base0F = "f2cdcd"; # flamingo
+    };
+    image = ./1363709.png;
+    cursor = {
+      name = "Banana cursor";
+      package = pkgs.banana-cursor;
+      size = 50;
+    };
+    polarity = "dark";
+    targets.tmux.enable = true;
+    targets.nixvim.enable = true;
+    targets.ghostty = {
+      enable = true;
+    };
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
