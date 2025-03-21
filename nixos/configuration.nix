@@ -1,13 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
   imports =
     [
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./gaming.nix
       ./vm.nix
@@ -29,7 +24,6 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
-  # Enable networking
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.userControl.enable = true;
@@ -145,7 +139,6 @@
     lazygit
     firefox
     wireshark
-    ghostty
     brave
     tmux
     git
@@ -166,6 +159,7 @@
     python312Packages.matplotlib
     typescript-language-server
     texlivePackages.latexindent
+    (texlive.withPackages (ps: [ ps.titlesec ]))
     texlab
     clang
     nixd
@@ -222,9 +216,6 @@
     bluez
     bluez-tools
     qbittorrent
-    gtk2
-    gtk3
-    gtk4
     grim
     slurp
     wl-clipboard
@@ -240,6 +231,7 @@
     libnotify
     darkman
     zoom-us
+    base16-schemes
   ];
 
   # cleanup
@@ -265,24 +257,8 @@
   # Stylix
   stylix = {
     enable = true;
-    base16Scheme = {
-      base00 = "1e1e2e";
-      base01 = "181825";
-      base02 = "313244"; # surface0
-      base03 = "45475a"; # surface1
-      base04 = "585b70"; # surface2
-      base05 = "cdd6f4"; # text
-      base06 = "f5e0dc"; # rosewater
-      base07 = "b4befe"; # lavender
-      base08 = "f38ba8"; # red
-      base09 = "fab387"; # peach
-      base0A = "f9e2af"; # yellow
-      base0B = "a6e3a1"; # green
-      base0C = "94e2d5"; # teal
-      base0D = "89b4fa"; # blue
-      base0E = "cba6f7"; # mauve
-      base0F = "f2cdcd"; # flamingo
-    };
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     image = ./1363709.png;
     cursor = {
       name = "Banana cursor";

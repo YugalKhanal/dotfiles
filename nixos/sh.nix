@@ -25,7 +25,6 @@
 
   programs.fzf = {
     enable = true;
-    # keybindings = true; # Enable fzf keybindings (Ctrl-R for history search, etc.)
-    # fuzzyCompletion = true; # Enable fuzzy completion for commands
+    enableZshIntegration = true;
   };
 }

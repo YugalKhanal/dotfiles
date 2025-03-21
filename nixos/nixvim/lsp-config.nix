@@ -1,37 +1,45 @@
-{ config, lib, pkgs, ... }:
 {
   programs.nixvim = {
     config = {
       plugins = {
-        cmp = {
+        lsp = {
           enable = true;
-          settings = {
-            snippet = {
-              expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+          servers = {
+            ts_ls.enable = true;
+            lua_ls.enable = true;
+            pyright.enable = true;
+            nixd.enable = true;
+            gopls = {
+              enable = true;
+              settings = {
+                gopls = {
+                  buildFlags = [ "-mod=mod" ];
+                  env = { GOFLAGS = "-mod=mod"; };
+                  analyses.unusedparams = true;
+                  staticcheck = true;
+                  usePlaceholders = false;
+                  completeUnimported = true;
+                };
+              };
             };
-            window = {
-              completion = { border = "rounded"; };
-              documentation = { border = "rounded"; };
+            clangd = {
+              enable = true;
+              filetypes = [ "c" "cpp" "objc" "objcpp" ];
+              cmd = [ "clangd" "--background-index" "--suggest-missing-includes" ];
             };
-            mapping = {
-              "<C-b>" = "require('cmp').mapping.scroll_docs(-4)";
-              "<C-f>" = "require('cmp').mapping.scroll_docs(4)";
-              "<C-Space>" = "require('cmp').mapping.complete()";
-              "<C-e>" = "require('cmp').mapping.abort()";
-              "<CR>" = "require('cmp').mapping.confirm({ select = true })";
-            };
-            sources = [
-              { name = "nvim_lsp"; }
-              { name = "luasnip"; }
-              { name = "buffer"; }
-            ];
+            ruff.enable = true;
+            texlab.enable = true;
           };
         };
-
-        luasnip = { enable = true; };
-        cmp-nvim-lsp = { enable = true; };
-        friendly-snippets = { enable = true; };
       };
+
+      # LSP-related keymaps
+      keymaps = [
+        { mode = "n"; key = "K"; action = "vim.lsp.buf.hover()"; options.desc = "Show hover information"; }
+        { mode = "n"; key = "<leader>gd"; action = "vim.lsp.buf.definition()"; options.desc = "Go to definition"; }
+        { mode = "n"; key = "<leader>gr"; action = "vim.lsp.buf.references()"; options.desc = "Find references"; }
+        { mode = "n"; key = "<leader>ca"; action = "vim.lsp.buf.code_action()"; options.desc = "Code actions when hovering"; }
+      ];
     };
   };
 }

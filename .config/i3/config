@@ -1,7 +1,7 @@
 # i3 Config Equivalent to Hyprland
 
 set $mod Mod4  # Super key
-set $terminal alacritty
+set $terminal ghostty
 set $fileManager thunar
 set $menu rofi -show drun -show-icons
 

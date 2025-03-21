@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-
   imports = [
     ./sh.nix
     ./nixvim
@@ -29,8 +28,32 @@
     vimAlias = true;
   };
 
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      window-decoration = false;
+      confirm-close-surface = false;
+    };
+  };
+
   programs.tmux = {
     enable = true;
+    baseIndex = 1;
+    aggressiveResize = true;
+    clock24 = true;
+    keyMode = "vi";
+    prefix = "C-space";
+    newSession = true;
+    secureSocket = true;
+    sensibleOnTop = true;
+    escapeTime = 0;
+    terminal = "screen-256color";
+    mouse = true;
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      vim-tmux-navigator
+      yank
+    ];
     extraConfig = ''
       # Set Ctrl-R to reload tmux config
       unbind r
@@ -56,7 +79,6 @@
       set -g @plugin 'tmux-plugins/tpm'
       set -g @plugin 'tmux-plugins/tmux-sensible'
       set -g @plugin 'christoomey/vim-tmux-navigator'
-      set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
       set -g @plugin 'tmux-plugins/tmux-yank'
 
       set -g default-terminal "tmux-256color"
@@ -97,16 +119,49 @@
             set -ga terminal-overrides ",xterm-256color:RGB"
             run-shell ~/.tmux/plugins/tpm/tpm
     '';
+    # extraConfig = ''
+    #   # set-option -sa terminal-overrides ",xterm*:Tc"
+    #
+    #   # set -as terminal-features ",xterm-256color:RGB"
+    #   set -g default-terminal "tmux-256color"
+    #   set -ga terminal-overrides ",xterm-256color:RGB"
+    #
+    #   # Move status bar to the top
+    #   set-option -g status-position top
+    #
+    #   # Vim navigation keys for pane navigation
+    #   bind-key h select-pane -L
+    #   bind-key j select-pane -D
+    #   bind-key k select-pane -U
+    #   bind-key l select-pane -R
+    #
+    #   # keybindings
+    #   bind-key -T copy-mode-vi v send-keys -X begin-selection
+    #   bind-key -T copy-mode-vi C-v send-keys -X rectanble-toggle
+    #   bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+    #
+    #   # Open panes in current directory
+    #   bind '"' split-window -v -c "#{pane_current_path}"
+    #   bind % split-window -h -c "#{pane_current_path}"
+    #
+    #   # Remap leader+n/p to leader+h/l
+    #   unbind n
+    #   unbind p
+    #   bind h previous-window
+    #   bind l next-window
+    # '';
   };
 
-
   home.packages = with pkgs; [
+    btop
+    gtk3
+    gtk4
+    ghostty
     vimPlugins.nvim-cmp
     bat
     fd
     protonvpn-gui
     ripgrep
-    fzf
     fontconfig
     zoxide
     hello
@@ -120,6 +175,10 @@
     networkmanagerapplet
     mpi
     nerd-fonts.jetbrains-mono
+    base16-schemes
+    # texlivePackages.latexindent
+    (texlive.withPackages (ps: [ ps.titlesec ps.latexindent ]))
+
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -131,23 +190,26 @@
 
   stylix = {
     enable = true;
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/base16-vim.yaml";
     base16Scheme = {
-      base00 = "1e1e2e";
-      base01 = "181825";
-      base02 = "313244"; # surface0
-      base03 = "45475a"; # surface1
-      base04 = "585b70"; # surface2
-      base05 = "cdd6f4"; # text
-      base06 = "f5e0dc"; # rosewater
-      base07 = "b4befe"; # lavender
-      base08 = "f38ba8"; # red
-      base09 = "fab387"; # peach
-      base0A = "f9e2af"; # yellow
-      base0B = "a6e3a1"; # green
-      base0C = "94e2d5"; # teal
-      base0D = "89b4fa"; # blue
-      base0E = "cba6f7"; # mauve
-      base0F = "f2cdcd"; # flamingo
+      base00 = "#181818"; # Background
+      base01 = "#282828";
+      base02 = "#383838";
+      base03 = "#585858";
+      base04 = "#b8b8b8";
+      base05 = "#d8d8d8"; # Default Text
+      base06 = "#e8e8e8";
+      base07 = "#f8f8f8";
+      base08 = "#ab4642"; # Red
+      base09 = "#dc9656"; # Orange
+      base0A = "#f7ca88"; # Yellow
+      base0B = "#a1b56c"; # Green
+      base0C = "#86c1b9"; # Cyan
+      base0D = "#7cafc2"; # Blue
+      base0E = "#ba8baf"; # Purple
+      base0F = "#a16946"; # Brown
     };
     image = ./1363709.png;
     cursor = {
@@ -155,11 +217,49 @@
       package = pkgs.banana-cursor;
       size = 50;
     };
+    fonts = {
+      sizes = {
+        terminal = 11;
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+    };
     polarity = "dark";
-    targets.tmux.enable = true;
-    targets.nixvim.enable = true;
-    targets.ghostty = {
-      enable = true;
+    targets = {
+      tmux.enable = true;
+      nixvim.enable = true;
+      ghostty.enable = true;
+      waybar.enable = true;
+      zathura.enable = true;
+      vesktop.enable = true;
+      fzf.enable = false;
+      gtk.enable = true;
+      hyprland.enable = true;
+      rofi.enable = true;
+      swaync.enable = true;
+      vim.enable = true;
+      btop.enable = true;
+      lazygit.enable = true;
+      mpv.enable = true;
+    };
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Banana";
+      package = pkgs.banana-cursor;
+      size = 50;
     };
   };
 
@@ -200,8 +300,8 @@
     PAGER = "less";
 
     # Add the cursor settings here:
-    XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
-    XCURSOR_SIZE = "24"; # Optional: Set cursor size
+    # XCURSOR_THEME = "banana-cursor"; # Set the banana cursor theme
+    # XCURSOR_SIZE = "50"; # Optional: Set cursor size
 
   };
 

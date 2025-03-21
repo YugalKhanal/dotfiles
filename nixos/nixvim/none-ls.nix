@@ -1,5 +1,3 @@
-{ config, lib, pkgs, ... }:
-
 {
   programs.nixvim = {
     config = {
@@ -8,7 +6,10 @@
         sources = {
           formatting = {
             nixpkgs_fmt.enable = true;
-            prettierd.enable = true;
+            prettierd = {
+              enable = true;
+              disableTsServerFormatter = true;
+            };
             stylua.enable = true;
             clang_format.enable = true;
             # latexindent.enable = true;
