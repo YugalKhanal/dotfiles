@@ -8,9 +8,10 @@
     stylix.url = "github:danth/stylix";
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    sekiro-theme.url = "path:./sekiro_grub_theme";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, nixvim, sekiro-theme, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -23,6 +24,9 @@
           modules = [
             ./configuration.nix
             stylix.nixosModules.stylix
+            ({ config, pkgs, ... }: {
+              _module.args.sekiroTheme = sekiro-theme;
+            })
           ];
         };
       };
