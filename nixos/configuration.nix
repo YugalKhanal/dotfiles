@@ -10,357 +10,319 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # boot.loader = {
-  #   grub = {
-  #     enable = true;
-  #     efiSupport = true;
-  #     device = "nodev";
-  #     theme = pkgs.runCommand "sekiro_grub_theme" { } ''
-  #       mkdir -p $out
-  #       cp -r ${inputs.sekiro-theme}/Sekiro/* $out
-  #     '';
-  #   };
-  #   timeout = 10;
-  #   efi.canTouchEfiVariables = true;
-  # };
-
   boot.loader = {
     grub = {
       enable = true;
       efiSupport = true;
       device = "nodev";
-      theme = pkgs.runCommand "sekiro-grub-theme" { } ''
-        mkdir -p $out
-        cp -r ${sekiroTheme}/Sekiro/* $out
-      '';
     };
     timeout = 10;
     efi.canTouchEfiVariables = true;
   };
-}
-
-
-  # boot.loader = {
-  #   grub = {
-  #     enable = true;
-  #     efiSupport = true;
-  #     device = "nodev";
-  #     theme = pkgs.runCommand "sekiro_grub_theme" { } ''
-  #       mkdir -p $out
-  #       cp -r ${/home/yugalkhanal/dotfiles/nixos/sekiro_grub_theme}/Sekiro/* $out
-  #     '';
-  #   };
-  #   timeout = 10;
-  # };
-
-
-  # boot.loader.efi = {
-  #   canTouchEfiVariables = true; # Allows writing to UEFI variables
-  # };
 
   networking.hostName = "nixos"; # Define your hostname.
 
-networking.networkmanager.enable = true;
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-# networking.networkmanager.userControl.enable = true;
+  networking.networkmanager.enable = true;
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.networkmanager.userControl.enable = true;
 
-# Set your time zone.
-time.timeZone = "Europe/London";
+  # Set your time zone.
+  time.timeZone = "Europe/London";
 
-# Select internationalisation properties.
-i18n.defaultLocale = "en_GB.UTF-8";
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
 
-i18n.extraLocaleSettings = {
-LC_ADDRESS = "en_GB.UTF-8";
-LC_IDENTIFICATION = "en_GB.UTF-8";
-LC_MEASUREMENT = "en_GB.UTF-8";
-LC_MONETARY = "en_GB.UTF-8";
-LC_NAME = "en_GB.UTF-8";
-LC_NUMERIC = "en_GB.UTF-8";
-LC_PAPER = "en_GB.UTF-8";
-LC_TELEPHONE = "en_GB.UTF-8";
-LC_TIME = "en_GB.UTF-8";
-};
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
+  };
 
+  # Configure console keymap
+  console.keyMap = "uk";
 
-# Configure console keymap
-console.keyMap = "uk";
+  # Update your Bluetooth configuration
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
-# Update your Bluetooth configuration
-hardware.bluetooth = {
-enable = true;
-powerOnBoot = true;
-};
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  virtualisation.docker.enable = true;
 
-virtualisation.docker.enable = true;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.yugalkhanal = {
+    isNormalUser = true;
+    description = "yugalkhanal";
+    # extraGroups = [ "users" "make" "network" "networkmanager" "wheel" "wireshark" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "users"
+      "wheel"
+      "wireshark"
+      "docker"
+      "audio"
+      "video"
+      "input"
+      "systemd-journal"
+      "disk"
+      "storage"
+      "plugdev"
+    ];
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
-users.users.yugalkhanal = {
-isNormalUser = true;
-description = "yugalkhanal";
-# extraGroups = [ "users" "make" "network" "networkmanager" "wheel" "wireshark" "docker" ];
-extraGroups = [
-"networkmanager"
-"users"
-"wheel"
-"wireshark"
-"docker"
-"audio"
-"video"
-"input"
-"systemd-journal"
-"disk"
-"storage"
-"plugdev"
-];
-packages = with pkgs; [
-#  thunderbird
-];
-shell = pkgs.zsh;
-};
+    packages = with pkgs; [
+      #  thunderbird
+    ];
 
-security.sudo.wheelNeedsPassword = false;
+    shell = pkgs.zsh;
+  };
 
-systemd.user.services.pipewire = {
-enable = true;
-wantedBy = [ "default.target" ];
-};
+  security.sudo.wheelNeedsPassword = false;
 
-systemd.user.services.wireplumber = {
-enable = true;
-wantedBy = [ "default.target" ];
-};
+  systemd.user.services.pipewire = {
+    enable = true;
+    wantedBy = [ "default.target" ];
+  };
 
-systemd.user.services.darkman = {
-enable = true;
-description = "Darkman system-wide dark mode daemon";
-serviceConfig = {
-ExecStart = "${pkgs.darkman}/bin/darkman --server";
-Restart = "always";
-};
-wantedBy = [ "default.target" ];
-};
+  systemd.user.services.wireplumber = {
+    enable = true;
+    wantedBy = [ "default.target" ];
+  };
 
-programs.hyprland = {
-enable = true;
-# nvidiaPatches = true;
-xwayland.enable = true;
-};
+  systemd.user.services.darkman = {
+    enable = true;
+    description = "Darkman system-wide dark mode daemon";
+    serviceConfig = {
+      ExecStart = "${pkgs.darkman}/bin/darkman --server";
+      Restart = "always";
+    };
+    wantedBy = [ "default.target" ];
+  };
 
-programs.zsh.enable = true;
+  programs.hyprland = {
+    enable = true;
+    # nvidiaPatches = true;
+    xwayland.enable = true;
+  };
 
-# Allow unfree packages
-nixpkgs.config.allowUnfree = true;
+  programs.zsh.enable = true;
 
-environment.shells = with pkgs; [ zsh ];
-users.defaultUserShell = pkgs.zsh;
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-environment.systemPackages = with pkgs; [
-tldr
-imagemagick
-tree
-tailscale
-pulseaudio
-pipewire
-pavucontrol # GUI for managing audio
-stow
-lxqt.lxqt-archiver
-zip
-unzip
-gnumake
-vim
-wget
-lazygit
-firefox
-wireshark
-brave
-tmux
-git
-inetutils
-docker
-gcc
-cmake
-pyright
-texlab
-gopls
-hyprls
-mpi
-prettierd
-vscode-langservers-extracted
-pkg-config
-llvmPackages_12.openmp
-python312Packages.numpy
-python312Packages.matplotlib
-typescript-language-server
-texlivePackages.latexindent
-(texlive.withPackages (ps: [ ps.titlesec ]))
-texlab
-clang
-nixd
-clang-tools
-lua-language-server
-stylua
-nixpkgs-fmt
-ruff
-black
-glib
-go
-lua
-nodejs_22
-python3
-luajit
-bluez
-rustc
-cargo
-ripgrep
-zsh
-zathura
-texliveFull
-nmap
-htop
-fd
-bat
-lazygit
-discord
-vesktop
-yq
-wireshark
-jetbrains.goland
-libreoffice
-certbot
-fastfetch
-xfce.thunar
-gvfs
-waybar
-spicetify-cli
-yt-dlp
-mpv
-ncspot
-transmission_4-gtk
-wlogout
-wttrbar
-libnotify
-swww
-rofi-wayland
-rofi-bluetooth
-wofi
-hyprlock
-killall
-OVMF
-bluez
-bluez-tools
-qbittorrent
-grim
-slurp
-wl-clipboard
-networkmanagerapplet
-spotify
-playerctl
-banana-cursor
-pavucontrol
-tcpdump
-warp-terminal
-poppler_utils
-bc
-libnotify
-darkman
-zoom-us
-base16-schemes
-];
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
 
-# cleanup
-nix.gc = {
-automatic = true;
-dates = "weekly"; # Run GC every week
-options = "--delete-older-than 7d"; # Keep only the last 7 days of generations
-};
+  environment.systemPackages = with pkgs; [
+    tldr
+    imagemagick
+    tree
+    tailscale
+    pulseaudio
+    pipewire
+    pavucontrol # GUI for managing audio
+    stow
+    lxqt.lxqt-archiver
+    zip
+    unzip
+    gnumake
+    vim
+    wget
+    lazygit
+    firefox
+    wireshark
+    brave
+    tmux
+    git
+    inetutils
+    docker
+    gcc
+    cmake
+    pyright
+    texlab
+    gopls
+    hyprls
+    mpi
+    prettierd
+    vscode-langservers-extracted
+    pkg-config
+    llvmPackages_12.openmp
+    python312Packages.numpy
+    python312Packages.matplotlib
+    typescript-language-server
+    texlivePackages.latexindent
+    (texlive.withPackages (ps: [ ps.titlesec ]))
+    texlab
+    clang
+    nixd
+    clang-tools
+    lua-language-server
+    stylua
+    nixpkgs-fmt
+    ruff
+    black
+    glib
+    go
+    lua
+    nodejs_22
+    python3
+    luajit
+    bluez
+    rustc
+    cargo
+    ripgrep
+    zsh
+    zathura
+    texliveFull
+    nmap
+    htop
+    fd
+    bat
+    lazygit
+    discord
+    vesktop
+    yq
+    wireshark
+    jetbrains.goland
+    libreoffice
+    certbot
+    fastfetch
+    xfce.thunar
+    gvfs
+    waybar
+    spicetify-cli
+    yt-dlp
+    mpv
+    ncspot
+    transmission_4-gtk
+    wlogout
+    wttrbar
+    libnotify
+    swww
+    rofi-wayland
+    rofi-bluetooth
+    wofi
+    hyprlock
+    killall
+    OVMF
+    bluez
+    bluez-tools
+    qbittorrent
+    grim
+    slurp
+    wl-clipboard
+    networkmanagerapplet
+    spotify
+    playerctl
+    banana-cursor
+    pavucontrol
+    tcpdump
+    warp-terminal
+    poppler_utils
+    bc
+    libnotify
+    darkman
+    zoom-us
+    base16-schemes
+  ];
 
-environment.sessionVariables = {
-# If your cursor becomes invisible
-WLR_NO_HARDWARE_CURSORS = "1";
-# Hint electron apps to use wayland
-NIXOS_OZONE_WL = "1";
-# XCURSOR_THEME = "banana-cursor";
-# XCURSOR_SIZE = "24";
-};
+  # cleanup
+  nix.gc = {
+    automatic = true;
+    dates = "weekly"; # Run GC every week
+    options = "--delete-older-than 7d"; # Keep only the last 7 days of generations
+  };
 
-xdg.portal.enable = true;
-xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  environment.sessionVariables = {
+    # If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+    # XCURSOR_THEME = "banana-cursor";
+    # XCURSOR_SIZE = "24";
+  };
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-# Stylix
-stylix = {
-enable = true;
-# base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-image = ./1363709.png;
-cursor = {
-name = "Banana cursor";
-package = pkgs.banana-cursor;
-size = 50;
-};
-polarity = "dark";
-targets = {
-grub = {
-enable = false;
-# useWallpaper = true;
-};
-};
-};
+  # Stylix
+  stylix = {
+    enable = true;
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    image = ./1363709.png;
+    cursor = {
+      name = "Banana cursor";
+      package = pkgs.banana-cursor;
+      size = 50;
+    };
+    polarity = "dark";
+    targets = {
+      grub = {
+        enable = false;
+        # useWallpaper = true;
+      };
+    };
+  };
 
-# List services that you want to enable:
-# Enable the X11 windowing system.
-services.xserver.enable = true;
+  # List services that you want to enable:
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
 
-# Enable the GNOME Desktop Environment.
-services.xserver.displayManager.gdm.enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
 
-# Enable the OpenSSH daemon.
-services.openssh.enable = true;
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
-# Configure keymap in X11, separate in hyprland
-services.xserver.xkb = {
-layout = "gb";
-variant = "mac";
-};
+  # Configure keymap in X11, separate in hyprland
+  services.xserver.xkb = {
+    layout = "gb";
+    variant = "mac";
+  };
 
-services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
-# Enable CUPS to print documents.
-services.printing.enable = true;
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
 
-services.pulseaudio.enable = true;
+  services.pulseaudio.enable = true;
 
-# Make sure the Bluetooth service starts up properly
-services.blueman.enable = true;
+  # Make sure the Bluetooth service starts up properly
+  services.blueman.enable = true;
 
-# Add the DBus service configuration
-services.dbus.enable = true;
-services.udisks2.enable = true;
-# services.dbus.packages = [ pkgs.bluez ];
+  # Add the DBus service configuration
+  services.dbus.enable = true;
+  services.udisks2.enable = true;
+  # services.dbus.packages = [ pkgs.bluez ];
 
-# Enable sound with pipewire .
-security.rtkit.enable = true;
-services.pipewire = {
-enable = false;
-# alsa.enable = true;
-# alsa.support32Bit = true;
-# pulse.enable = true;
-# jack.enable = true;
-# wireplumber.enable = true;
-};
+  # Enable sound with pipewire .
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = false;
+    # alsa.enable = true;
+    # alsa.support32Bit = true;
+    # pulse.enable = true;
+    # jack.enable = true;
+    # wireplumber.enable = true;
+  };
 
-# Enable touchpad support (enabled default in most desktopManager).
-# services.xserver.libinput.enable = true;
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
-# Open ports in the firewall.
-# networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
-networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
-networking.firewall.allowedUDPPorts = [ 3000 ];
-# Or disable the firewall altogether.
-# networking.firewall.enable = false;
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
+  networking.firewall.allowedUDPPorts = [ 3000 ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
-system.stateVersion = "24.05";
+  system.stateVersion = "24.05";
 }
