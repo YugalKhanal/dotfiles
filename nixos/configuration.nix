@@ -200,7 +200,6 @@
     wttrbar
     libnotify
     swww
-    rofi-wayland
     rofi-bluetooth
     wofi
     hyprlock
