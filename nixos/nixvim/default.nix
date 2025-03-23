@@ -7,6 +7,7 @@
     # ./copilot.nix
     ./dashboard.nix
     ./lazygit.nix
+    # ./leap.nix
     ./lsp-config.nix
     ./mappings.nix
     ./none-ls.nix
@@ -21,4 +22,10 @@
     ./vimtex.nix
     ./which-key.nix
   ];
+
+  programs.nixvim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 }
