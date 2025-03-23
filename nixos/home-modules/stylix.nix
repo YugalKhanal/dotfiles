@@ -6,24 +6,24 @@
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/base16-vim.yaml";
     base16Scheme = {
-      base00 = "#181818"; # Background
+      base00 = "#181818";
       base01 = "#282828";
       base02 = "#383838";
       base03 = "#585858";
       base04 = "#b8b8b8";
-      base05 = "#d8d8d8"; # Default Text
+      base05 = "#d8d8d8";
       base06 = "#e8e8e8";
       base07 = "#f8f8f8";
-      base08 = "#ab4642"; # Red
-      base09 = "#dc9656"; # Orange
-      base0A = "#f7ca88"; # Yellow
-      base0B = "#a1b56c"; # Green
-      base0C = "#86c1b9"; # Cyan
-      base0D = "#7cafc2"; # Blue
-      base0E = "#ba8baf"; # Purple
-      base0F = "#a16946"; # Brown
+      base08 = "#ab4642";
+      base09 = "#dc9656";
+      base0A = "#f7ca88";
+      base0B = "#a1b56c";
+      base0C = "#86c1b9";
+      base0D = "#7cafc2";
+      base0E = "#ba8baf";
+      base0F = "#a16946";
     };
-    image = ./1363709.png;
+    image = ./city-fixed.png;
     cursor = {
       name = "Banana cursor";
       package = pkgs.banana-cursor;
@@ -33,7 +33,7 @@
       sizes = {
         applications = 13;
         desktop = 13;
-        popups = 8;
+        popups = 13;
         terminal = 12;
       };
       monospace = {

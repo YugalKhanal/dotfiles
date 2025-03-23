@@ -12,7 +12,6 @@
   programs.steam = {
     enable = true;
     protontricks.enable = true;
-    gamescopeSession.enable = true;
   };
 
   programs.gamemode.enable = true;

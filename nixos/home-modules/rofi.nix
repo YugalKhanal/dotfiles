@@ -2,6 +2,7 @@
 
 let
   mkLiteral = lib.formats.rasi.mkLiteral or (x: x);
+  darkBg = mkLiteral "#000000";
 in
 {
   programs.rofi = {
@@ -15,15 +16,25 @@ in
         width = 600;
         border = 0;
         border-radius = 10;
-        background-color = lib.mkForce (mkLiteral "@background");
+        background-color = lib.mkForce darkBg;
         foreground-color = lib.mkForce (mkLiteral "@foreground");
+      };
+
+      "prompt" = {
+        background-color = lib.mkForce darkBg;
+        text-color = lib.mkForce (mkLiteral "@foreground");
+      };
+
+      "case-indicator" = {
+        background-color = lib.mkForce darkBg;
+        text-color = lib.mkForce (mkLiteral "@foreground");
       };
 
       "window" = {
         location = mkLiteral "north";
         anchor = mkLiteral "north";
         fullscreen = false;
-        background-color = lib.mkForce (mkLiteral "@background");
+        background-color = lib.mkForce darkBg;
         padding = 10;
         margin = 0;
       };
@@ -38,14 +49,22 @@ in
         enabled = true;
         padding = 10;
         border-radius = 6;
-        background-color = lib.mkForce (mkLiteral "@lightbg");
+        background-color = lib.mkForce darkBg;
+        text-color = lib.mkForce (mkLiteral "@foreground");
       };
+
 
       "entry" = {
         placeholder = "Search…";
         padding = 5;
         text-color = lib.mkForce (mkLiteral "@foreground");
-        background-color = lib.mkForce (mkLiteral "transparent");
+        background-color = lib.mkForce darkBg;
+      };
+
+      "textbox" = {
+        padding = 10;
+        text-color = lib.mkForce (mkLiteral "@foreground");
+        background-color = lib.mkForce darkBg;
       };
 
       "listview" = {
@@ -54,30 +73,30 @@ in
         spacing = 5;
         layout = mkLiteral "vertical";
         scrollbar = false;
+        background-color = lib.mkForce darkBg;
       };
 
       "element" = {
         padding = 10;
         border-radius = 8;
-        background-color = lib.mkForce (mkLiteral "@background");
+        background-color = lib.mkForce darkBg;
+        text-color = lib.mkForce (mkLiteral "@foreground");
       };
 
       "element selected.normal" = {
-        background-color = lib.mkForce (mkLiteral "@selected-normal-background");
-        text-color = lib.mkForce (mkLiteral "@selected-normal-text");
+        background-color = lib.mkForce (mkLiteral "#333333");
+        text-color = lib.mkForce (mkLiteral "#ffffff");
       };
 
       "element-icon" = {
         size = 32;
+        background-color = lib.mkForce (mkLiteral "transparent");
+        text-color = lib.mkForce (mkLiteral "@foreground");
       };
 
       "textbox-prompt-colon" = {
         str = "";
         padding = "0px 8px 0px 0px";
-      };
-
-      "textbox" = {
-        padding = 10;
         text-color = lib.mkForce (mkLiteral "@foreground");
       };
     };
