@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, sekiroTheme, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -15,10 +15,23 @@
       enable = true;
       efiSupport = true;
       device = "nodev";
+      useOSProber = true;
+      extraEntriesBeforeNixOS = true;
+      theme = pkgs.fetchFromGitHub
+        {
+          owner = "semimqmo";
+          repo = "sekiro_grub_theme";
+          rev = "1affe05f7257b72b69404cfc0a60e88aa19f54a6";
+          sha256 = "02gdihkd2w33qy86vs8g0pfljp919ah9c13cj4bh9fvvzm5zjfn1";
+        } + "/Sekiro";
+
+      gfxmodeEfi = "2560x1440";
+      gfxpayloadEfi = "keep";
     };
     timeout = 10;
-    efi.canTouchEfiVariables = true;
   };
+
+  boot.supportedFilesystems = [ "ntfs" ];
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -283,7 +296,7 @@
     polarity = "dark";
     targets = {
       grub = {
-        enable = true;
+        enable = false;
         useWallpaper = true;
       };
     };

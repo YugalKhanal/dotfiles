@@ -54,7 +54,7 @@
       tmux.enable = true;
       nixvim.enable = true;
       ghostty.enable = true;
-      waybar.enable = true;
+      waybar.enable = false;
       zathura.enable = true;
       vesktop.enable = true;
       fzf.enable = true;

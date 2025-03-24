@@ -8,7 +8,7 @@
       device = "nodev";
       theme = pkgs.runCommand "sekiro_grub_theme" { } ''
         mkdir -p $out
-        cp -r ${/home/yugalkhanal/dotfiles/nixos/sekiro_grub_theme}/Sekiro/* $out
+        cp -r ${./nixos/sekiro_grub_theme}/Sekiro/* $out
       '';
     };
     timeout = 10;

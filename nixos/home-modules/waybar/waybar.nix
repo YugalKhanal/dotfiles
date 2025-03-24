@@ -428,16 +428,4 @@
       }
     '';
   };
-
-  # Create the scripts directory and copy your scripts
-  xdg.configFile = {
-    "waybar/scripts/redshift.sh" = {
-      source = "${config.home.homeDirectory}/dotfiles/nixos/home-modules/waybar/redshift.sh";
-      executable = true;
-    };
-    "waybar/scripts/mediaplayer.sh" = {
-      source = "${config.home.homeDirectory}/dotfiles/nixos/home-modules/waybar/mediaplayer.sh";
-      executable = true;
-    };
-  };
 }

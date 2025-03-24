@@ -166,13 +166,11 @@
       ];
 
       exec-once = [
-        # "gsettings set org.gnome.desktop.interface cursor-theme 'banana'"
-        # "gsettings set org.gnome.desktop.interface cursor-size 50"
         "swww-daemon"
         "sleep 2 && swww img ~/wallpapers/city.png"
         "nm-applet --indicator"
-        "killall waybar || true"
-        "sleep 3 && waybar"
+        # "killall waybar || true"
+        # "sleep 3 && waybar"
         "blueman-applet"
         "swaync"
         "redshift"

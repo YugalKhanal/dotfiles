@@ -8,7 +8,7 @@
     clock24 = true;
     keyMode = "vi";
     prefix = "C-space";
-    newSession = true;
+    newSession = false;
     secureSocket = true;
     sensibleOnTop = true;
     escapeTime = 0;
