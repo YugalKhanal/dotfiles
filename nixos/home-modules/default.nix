@@ -1,6 +1,7 @@
 {
   imports = [
     ./fastfetch
+    ./waybar
     ./ghostty.nix
     ./hyprland.nix
     ./rofi.nix
