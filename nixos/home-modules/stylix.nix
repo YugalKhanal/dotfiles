@@ -51,21 +51,9 @@
     };
     polarity = "dark";
     targets = {
-      tmux.enable = true;
-      nixvim.enable = true;
-      ghostty.enable = true;
       waybar.enable = false;
-      zathura.enable = true;
-      vesktop.enable = true;
-      fzf.enable = true;
-      gtk.enable = true;
-      hyprland.enable = true;
-      rofi.enable = true;
-      swaync.enable = true;
-      vim.enable = true;
-      btop.enable = true;
-      lazygit.enable = true;
-      mpv.enable = true;
+      spicetify.enable = true;
+      nixcord.enable = false;
     };
   };
 

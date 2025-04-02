@@ -24,7 +24,16 @@
     ];
   };
 
+  news.display = "silent";
+
   home.packages = with pkgs; [
+    qbittorrent
+    qbittorrent-cli
+    nyaa
+    localsend
+    wlsunset
+    redshift
+    nodejs_latest
     btop
     gtk3
     gtk4

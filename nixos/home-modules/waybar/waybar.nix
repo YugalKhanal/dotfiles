@@ -9,17 +9,17 @@
     # Systemd integration
     systemd = {
       enable = true;
-      target = "hyprland-session.target"; # Change this if you use sway or another compositor
+      target = "hyprland-session.target";
     };
 
     # Configuration from your JSON files
     settings = {
       mainBar = {
-        layer = "top";
-        position = "top";
-        spacing = 6;
-        margin = "4px 5px";
-        exclusive = true;
+        "layer" = "top";
+        "position" = "top";
+        "spacing" = 6;
+        "margin" = "4px 5px";
+        "exclusive" = true;
         "fixed-center" = true;
         "modules-left" = [ "custom/launcher" "wlr/taskbar" "hyprland/window" ];
         "modules-center" = [ "hyprland/workspaces" ];
@@ -33,11 +33,11 @@
         # Module configuration
         "hyprland/workspaces" = {
           "active-only" = false;
-          format = "{name}";
+          "format" = "{name}";
         };
 
         "hyprland/window" = {
-          rewrite = {
+          "rewrite" = {
             "(.*) - Brave" = "$1";
             "(.*) - Chromium" = "$1";
             "(.*) - Brave Search" = "$1";
@@ -48,21 +48,21 @@
         };
 
         "clock" = {
-          format = "{:%R 󰃭 %d·%m·%y}";
-          rotate = 0;
+          "format" = "{:%R 󰃭 %d·%m·%y}";
+          "rotate" = 0;
           "tooltip-format" = "<span>{calendar}</span>";
-          calendar = {
-            mode = "month";
+          "calendar" = {
+            "mode" = "month";
             "mode-mon-col" = 3;
             "on-scroll" = 1;
             "on-click-right" = "mode";
-            format = {
-              months = "<span color='#ffead3'><b>{}</b></span>";
-              weekdays = "<span color='#ffcc66'><b>{}</b></span>";
-              today = "<span color='#ff6699'><b>{}</b></span>";
+            "format" = {
+              "months" = "<span color='#ffead3'><b>{}</b></span>";
+              "weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
+              "today" = "<span color='#ff6699'><b>{}</b></span>";
             };
           };
-          actions = {
+          "actions" = {
             "on-click-right" = "mode";
             "on-click-forward" = "tz_up";
             "on-click-backward" = "tz_down";
@@ -72,36 +72,36 @@
         };
 
         "custom/power" = {
-          format = "&#x23FB;";
-          tooltip = true;
+          "format" = "&#x23FB;";
+          "tooltip" = true;
           "on-click" = "wlogout -b 4";
         };
 
         "pulseaudio" = {
-          format = "{icon} {volume}% ";
+          "format" = "{icon} {volume}% ";
           "format-bluetooth" = "{icon}  {volume}%";
           "format-bluetooth-muted" = " {icon}  ";
           "format-muted" = " ";
           "format-source" = " {volume}%";
           "format-source-muted" = "";
           "format-icons" = {
-            headphone = "";
+            "headphone" = "";
             "hands-free" = "󱠰";
-            headset = "󰋎";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" "" "" ];
+            "headset" = "󰋎";
+            "phone" = "";
+            "portable" = "";
+            "car" = "";
+            "default" = [ "" "" "" ];
           };
           "on-click" = "pulsecontrol";
           "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
         };
 
         "bluetooth" = {
-          format = " {status}";
+          "format" = " {status}";
           "on-click" = "rofi-bluetooth";
-          "format-connected" = " {device_alias}";
-          "format-connected-battery" = " {device_alias} {device_battery_percentage}%";
+          "format-connected" = " {device_alias}";
+          "format-connected-battery" = " {device_alias} {device_battery_percentage}%";
           "tooltip-format" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
           "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
           "tooltip-format-enumerate-connected" = "{device_alias}\t{device_address}";
@@ -109,59 +109,60 @@
         };
 
         "network" = {
-          tooltip = true;
-          "format-wifi" = "  {essid}";
-          rotate = 0;
+          "tooltip" = true;
+          "format-wifi" = "  {essid}";
+          "rotate" = 0;
           "format-ethernet" = "󰈀";
           "tooltip-format" = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
           "format-linked" = "󰈀 {ifname} (No IP)";
           "format-disconnected" = "󰖪 ";
           "tooltip-format-disconnected" = "Disconnected";
-          interval = 2;
+          "interval" = 2;
           "on-click" = "nm-connection-editor";
         };
 
         "cpu" = {
-          format = " {}%  ";
+          "format" = " {}%  ";
           "on-click" = "ghostty -e btop";
         };
 
         "memory" = {
-          format = "{}%  ";
+          "format" = "{}%  ";
           "on-click" = "ghostty -e btop";
         };
 
         "disk" = {
-          interval = 30;
-          format = "{percentage_used}% ";
-          path = "/";
+          "interval" = 30;
+          "format" = "{percentage_used}% ";
+          "path" = "/";
           "on-click" = "ghostty -e btop";
         };
 
         "tray" = {
           "icon-size" = 18;
-          spacing = 5;
+          "spacing" = 5;
         };
 
         "custom/media" = {
-          format = "{icon}  <span>{}</span>";
+          "format" = "{icon}  <span>{}</span>";
           "return-type" = "json";
           "max-length" = 20;
-          exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+          "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
           "on-click" = "playerctl play-pause";
           "on-click-right" = "playerctl next";
           "on-click-middle" = "playerctl previous";
+
           "format-icons" = {
-            Paused = "";
-            Playing = "";
+            "Paused" = "";
+            "Playing" = "";
           };
         };
 
         "custom/launcher" = {
-          format = "󰀻";
+          "format" = "󰀻";
           "on-click" = "rofi -show drun -show-icons";
           "tooltip-format" = "Open the application launcher.";
-          tooltip = false;
+          "tooltip" = false;
         };
 
         "wlr/taskbar" = {
@@ -174,31 +175,31 @@
         };
 
         "custom/notification" = {
-          format = " {}";
+          "format" = " {}";
           "return-type" = "json";
           "exec-if" = "which swaync-client";
-          exec = "swaync-client -swb";
+          "exec" = "swaync-client -swb";
           "on-click" = "swaync-client -t -sw";
           "on-click-right" = "swaync-client -d -sw";
-          escape = true;
+          "escape" = true;
         };
 
         "custom/nightmode" = {
-          format = "{}";
-          interval = 5;
-          exec = "pgrep -x wlsunset > /dev/null && echo 'Night Mode: ON' || echo 'Night Mode: OFF'";
-          "on-click" = "${config.xdg.configHome}/waybar/scripts/redshift.sh";
+          "format" = "{}";
+          "interval" = 5;
+          "exec" = "pgrep -x wlsunset > /dev/null && echo 'Night Mode: ON' || echo 'Night Mode: OFF'";
+          "on-click" = "~/dotfile/nixos/home-modules/waybar/redshift.sh";
         };
 
         # Group configurations
         "group/systray" = {
-          orientation = "horizontal";
-          modules = [ "custom/media" "pulseaudio" "network" "tray" "bluetooth" "custom/nightmode" ];
+          "orientation" = "horizontal";
+          "modules" = [ "custom/media" "pulseaudio" "network" "tray" "bluetooth" "custom/nightmode" ];
         };
 
         "group/hardware-info" = {
-          orientation = "horizontal";
-          modules = [ "cpu" "memory" "disk" "custom/power" ];
+          "orientation" = "horizontal";
+          "modules" = [ "cpu" "memory" "disk" "custom/power" ];
         };
       };
     };

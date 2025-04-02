@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./gaming.nix
       ./vm.nix
+      ./cloud-storage.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -109,16 +110,6 @@
     wantedBy = [ "default.target" ];
   };
 
-  systemd.user.services.darkman = {
-    enable = true;
-    description = "Darkman system-wide dark mode daemon";
-    serviceConfig = {
-      ExecStart = "${pkgs.darkman}/bin/darkman --server";
-      Restart = "always";
-    };
-    wantedBy = [ "default.target" ];
-  };
-
   programs.zsh.enable = true;
 
   programs.hyprland.enable = true;
@@ -131,6 +122,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
+    agenix-cli
     tldr
     imagemagick
     tree
@@ -143,11 +135,14 @@
     zip
     unzip
     gnumake
+    openssl
     vim
     wget
     lazygit
     firefox
     wireshark
+    sqlite
+    postgresql_17
     brave
     tmux
     git
@@ -158,6 +153,7 @@
     pyright
     texlab
     gopls
+    nextcloud31
     hyprls
     mpi
     prettierd
@@ -181,7 +177,7 @@
     glib
     go
     lua
-    nodejs_22
+    nodejs_23
     python3
     luajit
     bluez
@@ -197,7 +193,6 @@
     bat
     lazygit
     discord
-    vesktop
     yq
     wireshark
     jetbrains.goland
@@ -207,10 +202,10 @@
     xfce.thunar
     gvfs
     waybar
-    spicetify-cli
     yt-dlp
     mpv
     ncspot
+    nginx
     transmission_4-gtk
     wlogout
     wttrbar
@@ -223,7 +218,6 @@
     OVMF
     bluez
     bluez-tools
-    qbittorrent
     grim
     slurp
     wl-clipboard
@@ -237,7 +231,6 @@
     poppler_utils
     bc
     libnotify
-    darkman
     zoom-us
     base16-schemes
   ];
@@ -350,7 +343,7 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
   networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
-  networking.firewall.allowedUDPPorts = [ 3000 ];
+  networking.firewall.allowedUDPPorts = [ 3000 5000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

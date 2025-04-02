@@ -4,7 +4,7 @@
     ./bufferline.nix
     ./comment.nix
     ./completions.nix
-    # ./copilot.nix
+    ./copilot.nix
     ./dashboard.nix
     ./lazygit.nix
     # ./leap.nix

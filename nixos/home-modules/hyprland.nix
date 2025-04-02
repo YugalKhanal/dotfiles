@@ -172,7 +172,7 @@
         # "killall waybar || true"
         # "sleep 3 && waybar"
         "blueman-applet"
-        "swaync"
+        # "swaync"
         "redshift"
       ];
     };
