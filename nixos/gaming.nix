@@ -15,6 +15,7 @@
   };
 
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   zramSwap.enable = true;
 
@@ -28,9 +29,9 @@
     wineWowPackages.full # (optional: for 32-bit and 64-bit support)
   ];
 
-  # environment.sessionVariables = {
-  #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/yugalkhanal/.steam/root/compatibilitytools.d";
-  # };
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/yugalkhanal/.steam/root/compatibilitytools.d";
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;

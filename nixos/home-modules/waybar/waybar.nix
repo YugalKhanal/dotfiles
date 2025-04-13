@@ -188,7 +188,7 @@
           "format" = "{}";
           "interval" = 5;
           "exec" = "pgrep -x wlsunset > /dev/null && echo 'Night Mode: ON' || echo 'Night Mode: OFF'";
-          "on-click" = "~/dotfile/nixos/home-modules/waybar/redshift.sh";
+          "on-click" = "~/dotfiles/nixos/home-modules/waybar/redshift.sh";
         };
 
         # Group configurations

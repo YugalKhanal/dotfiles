@@ -9,6 +9,7 @@
     ./sh.nix
     ./spicetify.nix
     ./stylix.nix
+    # ./thunar.nix
     ./tmux.nix
   ];
 }

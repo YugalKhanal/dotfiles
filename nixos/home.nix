@@ -27,6 +27,8 @@
   news.display = "silent";
 
   home.packages = with pkgs; [
+    jetbrains.goland
+    yazi
     qbittorrent
     qbittorrent-cli
     nyaa

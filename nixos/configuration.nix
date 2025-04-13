@@ -61,13 +61,33 @@
   # Configure console keymap
   console.keyMap = "uk";
 
-  # Update your Bluetooth configuration
+  # Sound settings
+  hardware.pulseaudio.enable = false;
+
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+    wireplumber.enable = true;
+  };
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
   };
 
+  services.blueman.enable = true; # Optional GUI for managing Bluetooth
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.auto-optimise-store = true;
 
   virtualisation.docker.enable = true;
 
@@ -75,12 +95,10 @@
   users.users.yugalkhanal = {
     isNormalUser = true;
     description = "yugalkhanal";
-    # extraGroups = [ "users" "make" "network" "networkmanager" "wheel" "wireshark" "docker" ];
     extraGroups = [
       "networkmanager"
       "users"
       "wheel"
-      "wireshark"
       "docker"
       "audio"
       "video"
@@ -101,19 +119,28 @@
   security.sudo.wheelNeedsPassword = false;
 
   systemd.user.services.pipewire = {
-    enable = true;
     wantedBy = [ "default.target" ];
   };
 
-  systemd.user.services.wireplumber = {
-    enable = true;
-    wantedBy = [ "default.target" ];
-  };
+  # systemd.user.services.wireplumber = {
+  #   enable = true;
+  #   wantedBy = [ "default.target" ];
+  # };
 
   programs.zsh.enable = true;
 
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [ thunar-archive-plugin ];
+  };
+
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
+
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -127,7 +154,6 @@
     imagemagick
     tree
     tailscale
-    pulseaudio
     pipewire
     pavucontrol # GUI for managing audio
     stow
@@ -154,7 +180,6 @@
     texlab
     gopls
     nextcloud31
-    hyprls
     mpi
     prettierd
     vscode-langservers-extracted
@@ -194,12 +219,9 @@
     lazygit
     discord
     yq
-    wireshark
-    jetbrains.goland
     libreoffice
     certbot
     fastfetch
-    xfce.thunar
     gvfs
     waybar
     yt-dlp
@@ -227,7 +249,6 @@
     banana-cursor
     pavucontrol
     tcpdump
-    warp-terminal
     poppler_utils
     bc
     libnotify
@@ -316,10 +337,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.pulseaudio.enable = true;
-
   # Make sure the Bluetooth service starts up properly
-  services.blueman.enable = true;
 
   # Add the DBus service configuration
   services.dbus.enable = true;
@@ -328,14 +346,6 @@
 
   # Enable sound with pipewire .
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = false;
-    # alsa.enable = true;
-    # alsa.support32Bit = true;
-    # pulse.enable = true;
-    # jack.enable = true;
-    # wireplumber.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -343,7 +353,7 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
   networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
-  networking.firewall.allowedUDPPorts = [ 3000 5000 ];
+  networking.firewall.allowedUDPPorts = [ 3000 5000 8080 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
