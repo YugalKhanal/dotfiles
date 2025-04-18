@@ -20,12 +20,16 @@
   zramSwap.enable = true;
 
   environment.systemPackages = with pkgs; [
+    gamemode
     mangohud
     protonup
     lutris
     heroic
     bottles
     wine
+    winetricks
+    glxinfo
+    vulkan-tools
     wineWowPackages.full # (optional: for 32-bit and 64-bit support)
   ];
 

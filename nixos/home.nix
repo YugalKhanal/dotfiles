@@ -27,6 +27,11 @@
   news.display = "silent";
 
   home.packages = with pkgs; [
+    # (gimp-with-plugins.override {
+    #   plugins = [ pkgs.gimpPlugins.gmic ];
+    # })
+    gimp3
+    kdePackages.gwenview
     jetbrains.goland
     yazi
     qbittorrent
@@ -58,8 +63,12 @@
     networkmanagerapplet
     mpi
     base16-schemes
-    # texlivePackages.latexindent
-    (texlive.withPackages (ps: [ ps.titlesec ps.latexindent ]))
+    # texliveFull
+    (texlive.withPackages (ps: [
+      # ps.titlesec
+      ps.latexindent
+      ps.adjustbox
+    ]))
   ];
 
   home.sessionVariables = {

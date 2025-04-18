@@ -54,6 +54,7 @@
       waybar.enable = false;
       spicetify.enable = true;
       nixcord.enable = false;
+      nixvim.enable = false;
     };
   };
 

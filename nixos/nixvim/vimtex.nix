@@ -21,10 +21,6 @@
         set conceallevel=2
       '';
 
-      # Uncomment this if you want to ignore specific warnings in quickfix
-      # extraConfigLua = ''
-      #   vim.g.vimtex_quickfix_ignore_filters = { "Overfull \\hbox" }
-      # '';
     };
   };
 }

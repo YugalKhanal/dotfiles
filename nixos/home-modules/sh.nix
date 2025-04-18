@@ -16,8 +16,8 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     oh-my-zsh.enable = true;
-    oh-my-zsh.theme = "robbyrussell"; # You can change this to any theme you like
-    oh-my-zsh.plugins = [ "git" "z" ]; # Plugins to enhance zsh functionality
+    oh-my-zsh.theme = "robbyrussell";
+    oh-my-zsh.plugins = [ "git" "z" ];
     initExtra = ''
       source <(${pkgs.fzf}/bin/fzf --zsh)
       bindkey '^F' fzf-history-widget

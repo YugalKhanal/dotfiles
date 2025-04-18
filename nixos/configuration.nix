@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
       ./gaming.nix
       ./vm.nix
-      ./cloud-storage.nix
+      # ./cloud-storage.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -62,7 +62,7 @@
   console.keyMap = "uk";
 
   # Sound settings
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   services.pipewire = {
     enable = true;
@@ -185,11 +185,10 @@
     vscode-langservers-extracted
     pkg-config
     llvmPackages_12.openmp
-    python312Packages.numpy
-    python312Packages.matplotlib
     typescript-language-server
-    texlivePackages.latexindent
-    (texlive.withPackages (ps: [ ps.titlesec ]))
+    # texlivePackages.latexindent
+    # texlivePackages.adjustbox
+    # (texlive.withPackages (ps: [ ps.titlesec ps.adjustbox]))
     texlab
     clang
     nixd
@@ -211,7 +210,7 @@
     ripgrep
     zsh
     zathura
-    texliveFull
+    # texliveFull
     nmap
     htop
     fd
@@ -352,8 +351,8 @@
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3000 3030 ];
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 ];
-  networking.firewall.allowedUDPPorts = [ 3000 5000 8080 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 8000 7000 5000 3030 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009 3010 ];
+  networking.firewall.allowedUDPPorts = [ 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009 3010 5000 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
