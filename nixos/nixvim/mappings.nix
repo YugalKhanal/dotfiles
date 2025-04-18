@@ -9,6 +9,7 @@
         { mode = "i"; key = "<C-k>"; action = "<Up>"; options.desc = "Move up"; }
         { mode = "n"; key = "<leader>S"; action = ":w<CR>"; options.desc = "Save file"; }
         { mode = "n"; key = "<leader>Q"; action = ":q<CR>"; options.desc = "Quit file"; }
+        { mode = "n"; key = "<leader>ih"; action = "<CMD>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>"; options.desc = "Toggle inlay hints"; }
       ];
     };
   };

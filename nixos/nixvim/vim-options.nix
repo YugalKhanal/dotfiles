@@ -25,7 +25,7 @@
       ];
 
       extraConfigLua = ''
-        vim.lsp.inlay_hint.enable()
+        -- vim.lsp.inlay_hint.enable()
       '';
     };
   };

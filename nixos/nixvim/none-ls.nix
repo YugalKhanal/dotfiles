@@ -3,6 +3,7 @@
     config = {
       plugins.none-ls = {
         enable = true;
+
         sources = {
           formatting = {
             nixpkgs_fmt.enable = true;
@@ -16,6 +17,23 @@
             gofmt.enable = true;
             black.enable = true;
           };
+        };
+
+        settings = {
+          on_attach = ''
+            function(client, bufnr)
+              if client.supports_method("textDocument/formatting") then
+                local augroup = vim.api.nvim_create_augroup("LspFormat", { clear = true })
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  group = augroup,
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                  end,
+                })
+              end
+            end
+          '';
         };
       };
 

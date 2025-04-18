@@ -4,6 +4,7 @@
       plugins = {
         lsp = {
           enable = true;
+          inlayHints = true;
           servers = {
             ts_ls.enable = true;
             lua_ls.enable = true;
@@ -19,6 +20,14 @@
                   staticcheck = true;
                   usePlaceholders = false;
                   completeUnimported = true;
+                  hints = {
+                    # compositeLiteralFields = true;
+                    # compositeLiteralTypes = true;
+                    # constantValues = true;
+                    functionTypeParameters = true;
+                    parameterNames = true;
+                    # rangeVariableTypes = true;
+                  };
                 };
               };
             };
@@ -30,16 +39,48 @@
             ruff.enable = true;
             texlab.enable = true;
           };
+
+          # LSP-related keymaps
+          keymaps = {
+            lspBuf = {
+              gd = {
+                action = "definition";
+                desc = "Goto Definition";
+              };
+              gr = {
+                action = "references";
+                desc = "Goto References";
+              };
+              K = {
+                action = "hover";
+                desc = "Show hover information";
+              };
+              ca = {
+                action = "code_action";
+                desc = "Code actions when hovering";
+              };
+              gts = {
+                action = "type_definition";
+                desc = "Goto type definition";
+              };
+              "<leader>cr" = {
+                action = "rename";
+                desc = "Rename symbol under cursor";
+              };
+            };
+            diagnostic = {
+              "[d" = {
+                action = "goto_next";
+                desc = "Goto next diagnostic";
+              };
+              "]d" = {
+                action = "goto_prev";
+                desc = "Goto previous diagnostic";
+              };
+            };
+          };
         };
       };
-
-      # LSP-related keymaps
-      keymaps = [
-        { mode = "n"; key = "K"; action = "vim.lsp.buf.hover()"; options.desc = "Show hover information"; }
-        { mode = "n"; key = "<leader>gd"; action = "vim.lsp.buf.definition()"; options.desc = "Go to definition"; }
-        { mode = "n"; key = "<leader>gr"; action = "vim.lsp.buf.references()"; options.desc = "Find references"; }
-        { mode = "n"; key = "<leader>ca"; action = "vim.lsp.buf.code_action()"; options.desc = "Code actions when hovering"; }
-      ];
     };
   };
 }
