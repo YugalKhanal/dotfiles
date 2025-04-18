@@ -63,7 +63,7 @@
                 action = "type_definition";
                 desc = "Goto type definition";
               };
-              "<leader>cr" = {
+              "<leader>rn" = {
                 action = "rename";
                 desc = "Rename symbol under cursor";
               };

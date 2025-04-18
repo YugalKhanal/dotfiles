@@ -25,7 +25,14 @@
       ];
 
       extraConfigLua = ''
-        -- vim.lsp.inlay_hint.enable()
+        vim.api.nvim_create_autocmd("LspAttach", {
+          callback = function(args)
+            local bufnr = args.buf
+            if vim.lsp.inlay_hint then
+              vim.lsp.inlay_hint.enable(false)
+            end
+          end
+        })
       '';
     };
   };

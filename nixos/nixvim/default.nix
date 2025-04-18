@@ -7,7 +7,7 @@
     ./copilot.nix
     ./dashboard.nix
     ./lazygit.nix
-    # ./leap.nix
+    ./leap.nix
     ./lsp-config.nix
     ./mappings.nix
     ./none-ls.nix

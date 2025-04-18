@@ -15,11 +15,6 @@
         key = "S";
         action = "<Plug>(leap-backward)";
       }
-      {
-        mode = [ "n" "x" "o" ];
-        key = "Gs";
-        action = "<Plug>(leap-from-window)";
-      }
     ];
   };
 }
