@@ -164,6 +164,7 @@
     openssl
     vim
     wget
+    libGL
     lazygit
     firefox
     wireshark
@@ -192,6 +193,7 @@
     texlab
     clang
     nixd
+    fyne
     clang-tools
     lua-language-server
     stylua

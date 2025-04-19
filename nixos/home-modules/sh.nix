@@ -12,6 +12,7 @@
       cls = "clear";
       grep = "grep --color=auto";
       home = "home-manager switch --flake .";
+      nd = "exec nix develop";
     };
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
