@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
       ./gaming.nix
       ./vm.nix
-      # ./cloud-storage.nix
+      ./cloud-storage.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

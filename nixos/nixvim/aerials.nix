@@ -5,7 +5,7 @@
         aerial = {
           enable = true;
         };
-        treesitter.enable = true; # Required dependency
+        treesitter.enable = true;
       };
 
       keymaps = [

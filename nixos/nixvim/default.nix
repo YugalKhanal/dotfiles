@@ -12,10 +12,10 @@
     ./mappings.nix
     ./none-ls.nix
     ./nvim-tree.nix
-    ./presence.nix
+    # ./presence.nix
     ./telescope.nix
     ./theme.nix
-    ./toggleterm.nix
+    ./nvterm.nix
     ./tree-sitter.nix
     ./vim-options.nix
     ./vim-tmux-navigator.nix
