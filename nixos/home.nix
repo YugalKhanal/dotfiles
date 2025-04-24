@@ -30,6 +30,10 @@
     # (gimp-with-plugins.override {
     #   plugins = [ pkgs.gimpPlugins.gmic ];
     # })
+    (pkgs.ollama.override {
+      acceleration = "cuda";
+      # enableCuda = true;
+    })
     gimp3
     kdePackages.gwenview
     jetbrains.goland
@@ -48,7 +52,6 @@
     vimPlugins.nvim-cmp
     bat
     fd
-    protonvpn-gui
     ripgrep
     fontconfig
     zoxide

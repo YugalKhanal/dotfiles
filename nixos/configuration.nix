@@ -84,8 +84,6 @@
     };
   };
 
-  services.blueman.enable = true; # Optional GUI for managing Bluetooth
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
 
