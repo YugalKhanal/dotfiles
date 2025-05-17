@@ -34,6 +34,7 @@
     #   acceleration = "cuda";
     # })
     podman
+    podman-desktop
     hyprlock
     ffmpeg
     alsa-utils
