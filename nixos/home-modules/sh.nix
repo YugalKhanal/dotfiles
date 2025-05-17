@@ -19,7 +19,7 @@
     oh-my-zsh.enable = true;
     oh-my-zsh.theme = "robbyrussell";
     oh-my-zsh.plugins = [ "git" "z" ];
-    initExtra = ''
+    initContent = ''
       source <(${pkgs.fzf}/bin/fzf --zsh)
       bindkey '^F' fzf-history-widget
     '';

@@ -2,6 +2,7 @@
   programs.nixvim = {
     config = {
       plugins = {
+        lsp-lines.enable = true;
         lsp = {
           enable = true;
           inlayHints = true;
@@ -21,12 +22,8 @@
                   usePlaceholders = false;
                   completeUnimported = true;
                   hints = {
-                    # compositeLiteralFields = true;
-                    # compositeLiteralTypes = true;
-                    # constantValues = true;
                     functionTypeParameters = true;
                     parameterNames = true;
-                    # rangeVariableTypes = true;
                   };
                 };
               };
@@ -34,7 +31,11 @@
             clangd = {
               enable = true;
               filetypes = [ "c" "cpp" "objc" "objcpp" ];
-              cmd = [ "clangd" "--background-index" "--suggest-missing-includes" ];
+              cmd = [
+                "clangd"
+                "--background-index"
+                "--suggest-missing-includes"
+              ];
             };
             ruff.enable = true;
             texlab.enable = true;
@@ -81,6 +82,24 @@
           };
         };
       };
+      extraConfigLua = ''
+        require("lsp_lines").setup()
+
+        vim.diagnostic.config({
+          virtual_text = {
+            prefix = "●",
+          },
+          virtual_lines = {
+            only_current_line = true,
+          },
+          signs = true,
+          underline = true,
+          update_in_insert = false,
+          float = {
+            border = "rounded",
+          },
+        })
+      '';
     };
   };
 }

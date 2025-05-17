@@ -12,7 +12,8 @@
     ./mappings.nix
     ./none-ls.nix
     ./nvim-tree.nix
-    # ./presence.nix
+    ./presence.nix
+    # ./snacks.nix
     ./telescope.nix
     ./theme.nix
     ./nvterm.nix

@@ -74,6 +74,8 @@
     wireplumber.enable = true;
   };
 
+  powerManagement.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -86,6 +88,13 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
+
+  nix.settings.trusted-users = [ "root" "yugalkhanal" ];
+  nix.extraOptions = ''
+    extra-substituters = https://devenv.cachix.org
+    extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
+  '';
+
 
   virtualisation.docker.enable = true;
 
@@ -115,6 +124,10 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+
+  security.pam.services.hyprlock = {
+    enable = true;
+  };
 
   systemd.user.services.pipewire = {
     wantedBy = [ "default.target" ];
@@ -148,6 +161,7 @@
 
   environment.systemPackages = with pkgs; [
     agenix-cli
+    netcat
     tldr
     imagemagick
     tree
@@ -160,6 +174,7 @@
     unzip
     gnumake
     openssl
+    lsof
     vim
     wget
     libGL
@@ -201,7 +216,6 @@
     glib
     go
     lua
-    nodejs_23
     python3
     luajit
     bluez
@@ -234,7 +248,6 @@
     swww
     rofi-bluetooth
     wofi
-    hyprlock
     killall
     OVMF
     bluez

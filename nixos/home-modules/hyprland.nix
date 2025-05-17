@@ -169,11 +169,9 @@
         "swww-daemon"
         "sleep 2 && swww img ~/wallpapers/city.png"
         "nm-applet --indicator"
-        # "killall waybar || true"
-        # "sleep 3 && waybar"
         "blueman-applet"
-        # "swaync"
         "redshift"
+        "wlsunset"
       ];
     };
   };

@@ -30,12 +30,14 @@
     # (gimp-with-plugins.override {
     #   plugins = [ pkgs.gimpPlugins.gmic ];
     # })
-    (pkgs.ollama.override {
-      acceleration = "cuda";
-      # enableCuda = true;
-    })
+    # (pkgs.ollama.override {
+    #   acceleration = "cuda";
+    # })
+    podman
+    hyprlock
+    ffmpeg
+    alsa-utils
     gimp3
-    kdePackages.gwenview
     jetbrains.goland
     yazi
     qbittorrent

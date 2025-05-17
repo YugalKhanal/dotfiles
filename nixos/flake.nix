@@ -40,7 +40,7 @@
             nixvim.homeManagerModules.nixvim
             stylix.homeManagerModules.stylix
             spicetify-nix.homeManagerModules.default
-            nixcord.homeManagerModules.nixcord
+            nixcord.homeModules.nixcord
           ];
 
           extraSpecialArgs = {

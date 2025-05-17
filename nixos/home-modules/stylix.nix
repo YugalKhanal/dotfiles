@@ -39,6 +39,8 @@
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
+        # package = pkgs.maple-mono.NF-CN;
+        # name = "Maple Mono";
       };
       sansSerif = {
         package = pkgs.dejavu_fonts;
